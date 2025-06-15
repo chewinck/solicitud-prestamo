@@ -8,7 +8,7 @@ import (
 )
 
 func TestApp(c *gin.Context) {
-	c.String(200, "talos up\n")
+	c.String(200, "Sollcitud prestamo up\n")
 }
 
 func TestSentry(c *gin.Context) {
