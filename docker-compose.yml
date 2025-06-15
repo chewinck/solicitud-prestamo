@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  inventario:
+    platform: linux/x86_64
+    build: .
+    image: solicitud-prestamo:dev
+    container_name: solicitud-prestamo-container
+    volumes: 
+      - ./:/solicitud-prestamo
+    expose:
+      - 8087
+    ports:
+      - 8087:8087
+    env_file:
+      - ${HOME}/environments/solicitud-prestamo-env/.env
