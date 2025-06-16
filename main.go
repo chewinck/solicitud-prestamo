@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"solicitudPrestamo/src/infraestructure/database"
 	"solicitudPrestamo/src/view/controller"
 	"time"
 
@@ -19,6 +20,11 @@ func main() {
 
 	if err != nil {
 		log.Println("Error al iniciar sentry: ", err)
+	}
+
+	database.IniciarEsquema()
+	if err != nil {
+		log.Fatalf("Error al inicializar la base de datos: %v", err)
 	}
 
 	defer sentry.Flush(2 * time.Second)
@@ -38,6 +44,7 @@ func main() {
 
 		r.GET("/mutant", controller.TestApp)
 		r.GET("/mutant-sentry", controller.TestSentry)
+		r.POST("/iniciar-solicitud", controller.IniciarSolicitudPrestamo)
 
 		r.Run(":8087")
 

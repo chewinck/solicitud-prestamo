@@ -7,6 +7,7 @@ services:
     container_name: solicitud-prestamo-container
     volumes: 
       - ./:/solicitud-prestamo
+      - ./data:/data
     expose:
       - 8087
     ports:
