@@ -47,9 +47,9 @@ docker logs -f solicitud-prestamo-container
 
 Para realizar pruebas, importa los siguientes archivos en Postman:
 
-    🧪 Archivo de entorno (solicitud-prestamo.postman_environment.json)
+    🧪 Archivo de entorno (SOLICITUD-PRESTAMO-LOCAL.postman_environment.json)
 
-    📬 Colección de pruebas (solicitud-prestamo.postman_collection.json)
+    📬 Colección de pruebas (API-SOLICITUD-PRESTAMO.postman_collection.json)
 
     Asegúrate de seleccionar el entorno correcto al momento de ejecutar cada request.
 

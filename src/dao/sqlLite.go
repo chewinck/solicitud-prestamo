@@ -108,10 +108,12 @@ func (s *SqlLite) VerificarIdentidad(solicitudPrestamoDto dto.SolicitudPrestamoD
 	if !(docIngresado == docBD && nombreIngresado == nombreBD) {
 		s.ActualizarEstado(uuid, "Identidad No Verificada Exitosamente")
 		fmt.Println("entra en: Identidad No Verificada Exitosamente")
+		solicitudPrestamoDto.Estado= "Identidad No Verificada Exitosamente"
 		return solicitudPrestamoDto, nil
 	}
 
 	s.ActualizarEstado(uuid, "Identidad Verificada Exitosamente")
+	solicitudPrestamoDto.Estado= "Identidad Verificada Exitosamente"
 	fmt.Print("inrgesa Identidad SI Verificada Exitosamente")
 	return solicitudPrestamoDto, nil
 }
