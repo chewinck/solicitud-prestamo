@@ -24,7 +24,7 @@ func IniciarSolicitudPrestamo(c *gin.Context) {
 	}
 	uuid := util.GenerateUUID()
 
-	iniciarSolicitudUsecase := usecase.NewIniciarSolicitudUseCase(solicitudPrestamoRepository)
+	solicitudPrestamoUsecase := usecase.NewIniciarSolicitudUseCase(solicitudPrestamoRepository)
 
 	solicitudPrestamoDto := dto.SolicitudPrestamoDto{
 		UUID:               uuid,
@@ -34,7 +34,26 @@ func IniciarSolicitudPrestamo(c *gin.Context) {
 		Estado:             "Solicitud de prestamo Iniciada",
 	}
 
-	go iniciarSolicitudUsecase.Execute(solicitudPrestamoDto)
+	go solicitudPrestamoUsecase.Execute(solicitudPrestamoDto)
 
 	c.JSON(http.StatusOK, gin.H{"uuid": uuid})
+}
+
+func ConsultarScore(c *gin.Context) {
+	var req formrequest.ConsultarScoreFormRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	consultarScoreUseCase := usecase.NewConsultarScoreUseCase(solicitudPrestamoRepository)
+
+	score := consultarScoreUseCase.Execute(string(req.UUID))
+	if score == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Score not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"score": score})
 }

@@ -3,8 +3,6 @@ package usecase
 import (
 	"solicitudPrestamo/src/domain"
 	"solicitudPrestamo/src/view/dto"
-
-	"github.com/getsentry/sentry-go"
 )
 
 type IniciarSolicitudUseCase struct {
@@ -17,11 +15,12 @@ func NewIniciarSolicitudUseCase(solicitudPrestamoRepository domain.SolicitudPres
 	}
 }
 
-func (useCase *IniciarSolicitudUseCase) Execute(solicitudPrestamoDto dto.SolicitudPrestamoDto) error {
-	err := useCase.SolicitudPrestamoRepository.IniciarSolicitud(solicitudPrestamoDto)
-	if err != nil {
-		sentry.CaptureException(err)
-		return err
-	}
-	return nil
+func (useCase *IniciarSolicitudUseCase) Execute(solicitudPrestamoDto dto.SolicitudPrestamoDto) interface{} {
+
+	solicitudPrestamo := domain.NewSolicitudPrestamo()
+	solicitudPrestamo.SetEstado(domain.NewIniciarSolicitud())
+	solicitudPrestamo.SetRepository(useCase.SolicitudPrestamoRepository)
+	solicitudPrestamo.Avanzar()
+
+	return solicitudPrestamo.GetScore()
 }

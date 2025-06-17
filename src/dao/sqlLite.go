@@ -33,3 +33,22 @@ func (s *SqlLite) IniciarSolicitud(solicitudPrestamoDto dto.SolicitudPrestamoDto
 	}
 	return nil
 }
+
+func (s *SqlLite) GuardarScore(score int) error {
+	db := database.ConnectorSQLite()
+
+	defer db.Close() // Cierra la conexión después de usarla
+
+	query := `
+	INSERT INTO solicitud_prestamos (
+		uuid, documento_identidad, nombre, monto, estado
+	) VALUES (?, ?, ?, ?, ?);
+	`
+
+	_, err := db.Exec(query, score)
+	if err != nil {
+		sentry.CaptureException(err)
+		return err
+	}
+	return nil
+}

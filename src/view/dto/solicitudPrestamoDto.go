@@ -6,4 +6,5 @@ type SolicitudPrestamoDto struct {
 	DocumentoIdentidad string  `json:"documento" `
 	MontoSolicitado    float64 `json:"monto" `
 	Estado             string  `json:"estado" `
+	Score              int     `json:"score,omitempty"` // Optional field for score
 }

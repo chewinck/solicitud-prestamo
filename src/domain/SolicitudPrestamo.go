@@ -1,20 +1,58 @@
 package domain
 
+import (
+	"fmt"
+	"solicitudPrestamo/src/view/dto"
+)
 
 type SolicitudPrestamo struct {
-	ID              string `json:"id"`
-	Nombre          string `json:"nombre"`
-	Apellido        string `json:"apellido"`
-	Email           string `json:"email"`
-	Telefono        string `json:"telefono"`
-	MontoSolicitado float64 `json:"monto_solicitado"`
-	FechaSolicitud  string `json:"fecha_solicitud"`
-	Estado          string `json:"estado"` // Ejemplo: "pendiente", "aprobado", "rechazado"
-	Comentarios     string `json:"comentarios,omitempty"` // Comentarios adicionales, si los hay
-	FechaAprobacion string `json:"fecha_aprobacion,omitempty"` // Fecha de aprobación, si aplica
-	FechaRechazo    string `json:"fecha_rechazo,omitempty"` // Fecha de rechazo, si aplica
-	MetodoPago      string `json:"metodo_pago,omitempty"` // Método de pago, si aplica
-	MontoAprobado   float64 `json:"monto_aprobado,omitempty"` // Monto aprobado, si aplica
-	Plazo           int    `json:"plazo,omitempty"` // Plazo del préstamo en meses, si aplica
-	TasaInteres     float64 `json:"tasa_interes,omitempty"` // Tasa de interés del préstamo, si aplica				
+	estadoSolicitudPrestamo     EstadoSolicitudPrestamo
+	solicitudPrestamoRepository SolicitudPrestamoRepository
+	solicitudPrestadoDto        dto.SolicitudPrestamoDto
+}
+
+func NewSolicitudPrestamo() *SolicitudPrestamo {
+	return &SolicitudPrestamo{}
+}
+
+func (s *SolicitudPrestamo) Avanzar() {
+	if s.estadoSolicitudPrestamo == nil {
+		fmt.Println("No se puede avanzar, el estado es nil")
+		return
+	}
+	s.estadoSolicitudPrestamo.CambiarEstado(*s)
+}
+
+func (s *SolicitudPrestamo) SetEstado(estadoSolicitudPrestamo EstadoSolicitudPrestamo) {
+	s.estadoSolicitudPrestamo = estadoSolicitudPrestamo
+
+	fmt.Println("Estado cambiado a:", s.GetEstado())
+}
+
+func (s *SolicitudPrestamo) GetEstado() EstadoSolicitudPrestamo {
+	return s.estadoSolicitudPrestamo
+}
+
+func (s *SolicitudPrestamo) SetRepository(SolicitudPrestamoRepository SolicitudPrestamoRepository) {
+	s.solicitudPrestamoRepository = SolicitudPrestamoRepository
+}
+
+func (s *SolicitudPrestamo) GetRepository() SolicitudPrestamoRepository {
+	return s.solicitudPrestamoRepository
+}
+
+func (s *SolicitudPrestamo) SetsolicitudPrestadoDto() {
+	s.solicitudPrestadoDto = dto.SolicitudPrestamoDto{}
+}
+
+func (s *SolicitudPrestamo) GetSolicitudPrestadoDto() dto.SolicitudPrestamoDto {
+	return s.solicitudPrestadoDto
+}
+
+func (s *SolicitudPrestamo) SetScore(score int) {
+	s.solicitudPrestadoDto.Score = score
+}
+
+func (s *SolicitudPrestamo) GetScore() int {
+	return s.solicitudPrestadoDto.Score
 }
