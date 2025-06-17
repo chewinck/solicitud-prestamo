@@ -45,7 +45,8 @@ func main() {
 		r.GET("/mutant", controller.TestApp)
 		r.GET("/mutant-sentry", controller.TestSentry)
 		r.POST("/iniciar-solicitud", controller.IniciarSolicitudPrestamo)
-		r.POST("/consultar-score", controller.IniciarSolicitudPrestamo)
+		r.POST("/consultar-score", controller.ConsultarScore)
+		r.POST("/verificar-identidad", controller.VerificarIdentidad)
 		// r.POST("/consultar-estado-solicitud", controller.IniciarSolicitudPrestamo)
 
 		r.Run(":8087")

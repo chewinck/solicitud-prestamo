@@ -15,12 +15,10 @@ func NewIniciarSolicitudUseCase(solicitudPrestamoRepository domain.SolicitudPres
 	}
 }
 
-func (useCase *IniciarSolicitudUseCase) Execute(solicitudPrestamoDto dto.SolicitudPrestamoDto) interface{} {
+func (useCase *IniciarSolicitudUseCase) Execute(solicitudPrestamoDto dto.SolicitudPrestamoDto) {
 
 	solicitudPrestamo := domain.NewSolicitudPrestamo()
 	solicitudPrestamo.SetEstado(domain.NewIniciarSolicitud())
 	solicitudPrestamo.SetRepository(useCase.SolicitudPrestamoRepository)
 	solicitudPrestamo.Avanzar()
-
-	return solicitudPrestamo.GetScore()
 }

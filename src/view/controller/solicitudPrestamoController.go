@@ -57,3 +57,24 @@ func ConsultarScore(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"score": score})
 }
+
+func VerificarIdentidad(c *gin.Context) {
+	var req formrequest.VerificarIdentidadFormRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	verificarIdentidadUseCase := usecase.NewVerificarIdentidadUseCase(solicitudPrestamoRepository)
+
+	verificarIdentidadDto := dto.SolicitudPrestamoDto{
+		DocumentoIdentidad: req.DocumentoIdentidad,
+		UUID:               req.UUID,
+		NombreCompleto:     req.NombreCompleto,
+	}
+
+	resp := verificarIdentidadUseCase.Execute(verificarIdentidadDto)
+
+	c.JSON(resp.Code, resp)
+}

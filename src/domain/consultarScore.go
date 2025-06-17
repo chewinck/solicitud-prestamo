@@ -11,6 +11,6 @@ func NewConsultarScore() *ConsultarScore {
 
 func (c *ConsultarScore) CambiarEstado(solicitudPrestamo SolicitudPrestamo) {
 	score := score.ConsultarScore(solicitudPrestamo.GetSolicitudPrestadoDto())
-	solicitudPrestamo.GetRepository().GuardarScore(score)
+	solicitudPrestamo.GetRepository().GuardarScore(solicitudPrestamo.GetSolicitudPrestadoDto().UUID, score)
 	solicitudPrestamo.SetScore(score)
 }

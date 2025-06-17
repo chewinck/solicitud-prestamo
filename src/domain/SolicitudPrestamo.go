@@ -29,8 +29,8 @@ func (s *SolicitudPrestamo) SetEstado(estadoSolicitudPrestamo EstadoSolicitudPre
 	fmt.Println("Estado cambiado a:", s.GetEstado())
 }
 
-func (s *SolicitudPrestamo) GetEstado() EstadoSolicitudPrestamo {
-	return s.estadoSolicitudPrestamo
+func (s *SolicitudPrestamo) GetEstado() string {
+	return s.GetSolicitudPrestadoDto().Estado
 }
 
 func (s *SolicitudPrestamo) SetRepository(SolicitudPrestamoRepository SolicitudPrestamoRepository) {
@@ -41,8 +41,8 @@ func (s *SolicitudPrestamo) GetRepository() SolicitudPrestamoRepository {
 	return s.solicitudPrestamoRepository
 }
 
-func (s *SolicitudPrestamo) SetsolicitudPrestadoDto() {
-	s.solicitudPrestadoDto = dto.SolicitudPrestamoDto{}
+func (s *SolicitudPrestamo) SetsolicitudPrestadoDto(SolicitudPrestamoDto dto.SolicitudPrestamoDto) {
+	s.solicitudPrestadoDto = SolicitudPrestamoDto
 }
 
 func (s *SolicitudPrestamo) GetSolicitudPrestadoDto() dto.SolicitudPrestamoDto {
@@ -55,4 +55,12 @@ func (s *SolicitudPrestamo) SetScore(score int) {
 
 func (s *SolicitudPrestamo) GetScore() int {
 	return s.solicitudPrestadoDto.Score
+}
+
+func (s *SolicitudPrestamo) SetSimulacionPrestamo(simulacionPrestamoDto dto.SimulacionPrestamoDto) {
+	s.solicitudPrestadoDto.SimulacionPrestamoDto = simulacionPrestamoDto
+}
+
+func (s *SolicitudPrestamo) GetSimulacionPrestamo() dto.SimulacionPrestamoDto {
+	return s.solicitudPrestadoDto.SimulacionPrestamoDto
 }
