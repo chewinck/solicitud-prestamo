@@ -15,7 +15,7 @@ func IniciarEsquema() error {
         nombre TEXT NOT NULL,
         monto INTEGER NOT NULL,
 		estado TEXT NOT NULL DEFAULT 'Solicitud Inciada',
-		score INTEGER DEFAULT NULL,
+		score INTEGER DEFAULT 0
     );
     `
 	db := ConnectorSQLite() // Adjust the path as needed

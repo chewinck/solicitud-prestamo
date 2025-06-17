@@ -1,6 +1,9 @@
 package usecase
 
-import "solicitudPrestamo/src/domain"
+import (
+	"solicitudPrestamo/src/domain"
+	"solicitudPrestamo/src/view/dto"
+)
 
 type ConsultarScoreUseCase struct {
 	SolicitudPrestamoRepository domain.SolicitudPrestamoRepository
@@ -12,8 +15,12 @@ func NewConsultarScoreUseCase(solicitudPrestamoRepository domain.SolicitudPresta
 	}
 }
 
-func (useCase *ConsultarScoreUseCase) Execute(uuid string) interface{} {
+func (useCase *ConsultarScoreUseCase) Execute(documento string) interface{} {
+	solcitudPrestamoDto := dto.SolicitudPrestamoDto{
+		DocumentoIdentidad: documento,
+	}
 	solicitudPrestamo := domain.NewSolicitudPrestamo()
+	solicitudPrestamo.SetsolicitudPrestadoDto(solcitudPrestamoDto)
 	solicitudPrestamo.SetEstado(domain.NewConsultarScore())
 	solicitudPrestamo.SetRepository(useCase.SolicitudPrestamoRepository)
 	solicitudPrestamo.Avanzar()

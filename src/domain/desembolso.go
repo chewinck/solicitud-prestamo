@@ -10,7 +10,7 @@ type Desembolso struct {
 func NewDesembolso() *Desembolso {
 	return &Desembolso{}
 }
-func (d *Desembolso) CambiarEstado(solicitudPrestamo SolicitudPrestamo) {
+func (d *Desembolso) CambiarEstado(solicitudPrestamo *SolicitudPrestamo) {
 
 	simulacionPrestamoDto := dto.SimulacionPrestamoDto{
 		MontoSolicitado: solicitudPrestamo.solicitudPrestadoDto.MontoSolicitado,

@@ -47,7 +47,7 @@ func main() {
 		r.POST("/iniciar-solicitud", controller.IniciarSolicitudPrestamo)
 		r.POST("/consultar-score", controller.ConsultarScore)
 		r.POST("/verificar-identidad", controller.VerificarIdentidad)
-		// r.POST("/consultar-estado-solicitud", controller.IniciarSolicitudPrestamo)
+		r.POST("/consultar-estado-solicitud", controller.ConsultarEstado)
 
 		r.Run(":8087")
 

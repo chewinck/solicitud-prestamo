@@ -1,5 +1,9 @@
 package formRequest
 
 type ConsultarScoreFormRequest struct {
-	UUID string `json:"uuid" validate:"required,uuid"`
+	DocumentoIdentidad string `json:"documento" validate:"required"`
+}
+
+type ConsultarEstadoFormRequest struct {
+	UUID string `json:"uuid" validate:"required"`
 }

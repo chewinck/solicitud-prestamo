@@ -20,13 +20,13 @@ func (s *SolicitudPrestamo) Avanzar() {
 		fmt.Println("No se puede avanzar, el estado es nil")
 		return
 	}
-	s.estadoSolicitudPrestamo.CambiarEstado(*s)
+
+	fmt.Println("Ingresa al Avanzar del flujo para ")
+	s.estadoSolicitudPrestamo.CambiarEstado(s)
 }
 
 func (s *SolicitudPrestamo) SetEstado(estadoSolicitudPrestamo EstadoSolicitudPrestamo) {
 	s.estadoSolicitudPrestamo = estadoSolicitudPrestamo
-
-	fmt.Println("Estado cambiado a:", s.GetEstado())
 }
 
 func (s *SolicitudPrestamo) GetEstado() string {

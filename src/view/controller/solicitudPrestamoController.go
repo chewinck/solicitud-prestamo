@@ -49,7 +49,7 @@ func ConsultarScore(c *gin.Context) {
 
 	consultarScoreUseCase := usecase.NewConsultarScoreUseCase(solicitudPrestamoRepository)
 
-	score := consultarScoreUseCase.Execute(string(req.UUID))
+	score := consultarScoreUseCase.Execute(req.DocumentoIdentidad)
 	if score == nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Score not found"})
 		return
@@ -77,4 +77,19 @@ func VerificarIdentidad(c *gin.Context) {
 	resp := verificarIdentidadUseCase.Execute(verificarIdentidadDto)
 
 	c.JSON(resp.Code, resp)
+}
+
+func ConsultarEstado(c *gin.Context) {
+	var req formrequest.ConsultarEstadoFormRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	consultarEstadoUseCase := usecase.NewConsultarEstadoUseCase(solicitudPrestamoRepository)
+	resp := consultarEstadoUseCase.Execute(req.UUID)
+
+	c.JSON(resp.Code, resp.Data)
+
 }

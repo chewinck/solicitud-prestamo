@@ -6,7 +6,6 @@ import (
 )
 
 func ConsultarScore(solicitudPrestadoDto dto.SolicitudPrestamoDto) int {
-	//lógica para consultar el score crediticio en un servicio externo con la infromación de solicitudPrestadoDto
-	util.GenerateRandomScore()
-	return 700
+	return util.GenerateRandomScore()
+
 }

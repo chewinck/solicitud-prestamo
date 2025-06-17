@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -16,6 +17,8 @@ func ConnectorSQLite() *sql.DB {
 		sentry.CaptureException(err)
 		log.Fatalf("No se pudo conectar a SQLite: %v", err)
 	}
+
+	fmt.Println("Conectando a:", os.Getenv("DB_PATH"))
 
 	if err = db.Ping(); err != nil {
 		sentry.CaptureException(err)

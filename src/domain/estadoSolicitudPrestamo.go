@@ -1,5 +1,5 @@
 package domain
 
 type EstadoSolicitudPrestamo interface {
-	CambiarEstado(solicitudPrestamo SolicitudPrestamo)
+	CambiarEstado(solicitudPrestamo *SolicitudPrestamo)
 }
